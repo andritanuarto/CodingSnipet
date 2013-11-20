@@ -10,53 +10,66 @@
 </html>
 
 <script type="text/javascript">
+/*
+Author: Andri Tanuarto
+Date: Nov 20, 2013
+Description: Coordinate javascript animation. From this code you can control the moving element using x & y coordinate concept.
+*/
+
 function move(element, speed, positionX, positionY, finishedPositionX, finishedPositionY, restartPositionX, restartPositionY, opacityVal, opacitySpeed, fadeStart, fadeFinish, repeat){
     
-    this.box                = document.getElementById(element);
-    this.speed              = speed;
-    this.positionX          = positionX;
-    this.positionY          = positionY;
-    this.finishedPositionX  = finishedPositionX;
-    this.finishedPositionY  = finishedPositionY;
-    this.restartPositionX   = restartPositionX;
-    this.restartPositionY   = restartPositionY;
-    this.opacityVal         = opacityVal;
-    this.opacitySpeed       = opacitySpeed;
-    this.fadeStart          = fadeStart;
-    this.fadeFinish         = fadeFinish;
-    this.repeat             = repeat;
+    this.box                = document.getElementById(element);   // Select Element (string)
+    this.speed              = speed;                              // Animation Speed (int)
+    this.positionX          = positionX;                          // Start X Position (int)
+    this.positionY          = positionY;                          // Start Y position (int)
+    this.finishedPositionX  = finishedPositionX;                  // Finished X Position (int)
+    this.finishedPositionY  = finishedPositionY;                  // Finished Y Position (int)
+    this.restartPositionX   = restartPositionX;                   // Restart X Position (int)
+    this.restartPositionY   = restartPositionY;                   // Restart Y Position (int)
+    this.opacityVal         = opacityVal;                         // Start CSS Opacity Value (int)
+    this.opacitySpeed       = opacitySpeed;                       // Opacity Speed or Hide Speed (int)
+    this.fadeStart          = fadeStart;                          // Fade Start From Position Y (int)
+    this.fadeFinish         = fadeFinish;                         // Fade Finish From Position Y (int)
+    this.repeat             = repeat;                             // Repeat Animation (boolean)
     
-    function diagonal(){
+    //xyMove is a function to create animation move base on css left and top position
+
+    function xyMove(){ 
       positionX++;
       positionY++;
 
+      //box style
       box.style.left= (positionX)+"px";
       box.style.top= (positionY)+"px";
       box.style.opacity=opacityVal;
 
+      //do opacity according when the element start to fade and finish fade
       if((positionY >= fadeStart) && (positionY <= fadeFinish)){
         opacityVal-=0.1;
         var doOpacity = setInterval(opacity, opacitySpeed);
         clearInterval(doOpacity);
       }
 
+      //restart position when both x & y are reached the finished position
       if((positionX == finishedPositionX) && (positionY == finishedPositionY)){
         positionX = restartPositionX;
         positionY = restartPositionY;
         opacityVal = 1;
 
+        //set if the animation is repeated
         if(repeat == false){
-          clearInterval(moveDiagonal);
-          moveDiagonal = 0;
+          clearInterval(intervalAnimation);
+          intervalAnimation = 0; //set 0 to stop animation
         }
       }
     }
 
+    //opacity function for doing opacity
     function opacity(){
       opacityVal -= 0.1;
-      console.log(opacityVal);
     }
 
-    var moveDiagonal = setInterval(diagonal, speed);
+    //set intervalAnimation
+    var intervalAnimation = setInterval(xyMove, speed);
 }
 </script>
