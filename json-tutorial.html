@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<title>Untitled Document</title> 
+</head>
+<body>
+<script>
+var myJSONObject = {"bindings": [
+		{"ircEvent": "PRIVMSG", "method": "newURI", "regex": "http://.*"},
+		{"ircEvent": "PRIVMSG", "method": "deleteURI", "regex": "^delete.*"},
+        {"ircEvent": "PRIVMSG", "method": "randomURI", "regex": "^random.*"}
+	]
+	
+};
+
+alert(myJSONObject.bindings[0]);
+</script>
+</body>
+</html>

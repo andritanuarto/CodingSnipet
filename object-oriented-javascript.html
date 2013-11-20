@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<title>Untitled Document</title> 
+</head>
+<body>
+<script>
+function myObject(x){  
+
+    this.whatAmI = function(){  
+        alert('I am ' + x);  
+    }
+
+    this.whoAreYou = function(){
+    	alert('You are' + myName);
+    }
+}
+
+var myNewObject = new myObject('an object');  
+
+myNewObject.whatAmI();  
+myNewObject.whoAreYou();
+</script>
+</body>
+</html>

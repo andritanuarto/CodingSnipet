@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<title>Untitled Document</title> 
+</head>
+<style>
+.bar-wrapper{width:200px; height:20px; background: red; }
+#progress {height:20px; background:green; }
+#number {font-family: arial; font-size: 200px; font-weight:bold;}
+</style>
+
+<body> 
+
+<div class="bar-wrapper"><div id="progress"></div></div>
+<div id="number"></div>
+<a onclick="progressBar(1)">click</a>
+<script>
+function progressBar(speed){
+	var progress = document.getElementById("progress");
+	var number = document.getElementById("number");
+	var width = 0;
+
+	function moving(){
+		width++
+		console.log(width);
+		progress.style.width = width+"%";
+		number.innerHTML = width.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	
+		 if (width == 100){
+    	   clearInterval(id);
+    	 	}
+	}
+	
+	
+
+   
+
+	var id = setInterval(moving, speed);
+}
+
+//var timeout = setTimeout(progressBar, 3000);
+</script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<html>
+<head>
+<title></title>
+<style>
+#slider-wrap {width:980px; height:420px; background:#000; overflow:hidden;}
+.slider {width:980px; height:420px;}
+#navigation {list-style-type:none; padding:0; margin:0; width:980px; height:30px;}
+#timer-wrap {width:980px; height:20px;}
+#timer {width:100%; height:10px; background:red;}
+#navigation li {float:left; height:30px; width:245px; background:#ccc;}
+</style>
+</head>
+<body>
+<div id="slider-wrap">
+	<div class="slider" style="background:green;"></div>
+	<div class="slider" style="background:red;"></div>
+	<div class="slider" style="background:orange;"></div>
+	<div class="slider" style="background:blue;"></div>
+</div>
+<div id="timer-wrap"><div id="timer"></div></div>
+<ul id="navigation"></ul>
+<a href="#" id="on" onclick="playStop(1)">On</a> <a href="#" id="off" onclick="playStop(0)">Off</a>
+<script>
+var sliderWrap = document.getElementById('slider-wrap');
+var sliderWrapChild = sliderWrap.children;
+var navigation = document.getElementById('navigation');
+var time = document.getElementById('timer');
+var width = 0;
+var on = document.getElementById('on');
+var off = document.getElementById('off');
+
+
+
+for(var i = 0; i < sliderWrapChild.length; i++){
+	sliderWrapChild[i].className += " slide"+i;
+}
+
+for(var q = 0; q < sliderWrapChild.length; q++){
+	navigation.appendChild(document.createElement("li"));
+}
+
+function loopNavigation(){
+	for(var x = 0; x < navigation.children.length; x++)
+	{
+		navigation.children[x].style.background="#ccc";
+	}
+}
+
+function loopSlider(){
+	for (var y = 0; y < sliderWrapChild.length; y++)
+	{
+		sliderWrap.children[y].style.display="none";
+	}
+}
+function progressBar(){
+	width++
+	timer.style.width = width+"%";
+
+	if(width <= 25){
+		loopNavigation();
+		loopSlider();
+		navigation.children[0].style.background="black";
+		sliderWrap.children[0].style.display="block";
+	} else if (width <= 50){
+		loopNavigation();
+		loopSlider();
+		navigation.children[1].style.background="black";
+		sliderWrap.children[1].style.display="block";
+	} else if (width <= 75){
+		loopNavigation();
+		loopSlider();
+		navigation.children[2].style.background="black";
+		sliderWrap.children[2].style.display="block";
+	} else if (width < 100){
+		loopNavigation();
+		loopSlider();
+		navigation.children[3].style.background="black";
+		sliderWrap.children[3].style.display="block";
+	} else {
+		width = 0;
+	}
+
+	navigation.children[0].onclick=function(){
+		width = 0;
+	}
+
+	navigation.children[1].onclick=function(){
+		width = 26;
+	}
+
+	navigation.children[2].onclick=function(){
+		width = 51;
+	}
+
+	navigation.children[3].onclick=function(){
+		width = 76;
+	}
+}
+
+var interval = setInterval(progressBar, 100);
+
+off.onclick=function(){
+	interval = false;
+	
+}
+
+console.log(interval);
+</script>
+</body>
+</html>

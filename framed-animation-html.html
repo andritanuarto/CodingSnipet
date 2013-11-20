@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<title>Untitled Document</title> 
+</head> 
+<body> 
+<a href="#" onclick ="move()">click this</a>
+<div id="box" style="position:absolute; width: 20px; height: 20px; background:pink;"></div>
+<script type="text/javascript">
+function move(){
+  
+  var background = 0;
+
+  function frame(){
+
+    var color;
+    background++;
+    
+    if(background == 0){
+      color = "red";
+    } else if (background == 1){
+      color = "blue";
+    } else if (background == 2){
+      color = "orange";
+    } else if (background == 3){
+      color = "green";
+    } else if (background == 4){
+      color = "grey";
+    } else if (background == 5){
+      color = "black";
+    } else {
+      background = 0;
+    }
+      console.log(background);
+    document.getElementById('box').style.background = color; 
+
+    if (background == 5){
+      clearInterval(id);
+    }
+  }
+  
+  var id = setInterval(frame, 900); //setInterval
+
+}
+</script>
+</body> 
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<title>Untitled Document</title> 
+</head>
+<body>
+<script>
+var f1Team = {
+  ferrari: { 
+    one : "Fernando Alonso",
+    two : "Felippe Massa"
+  },
+
+  redbull: {
+    one : "Sebastian Vettel",
+    two : "Mark Webber"
+  },
+
+  mercedez: {
+    one : "Lewis Hamilton",
+    two : "Nico Rosberg"
+  },
+
+  president: "Bernie ecclestone"
+}
+
+document.write(f1Team.ferrari.one); //print Fernando Alonso
+document.write("<br>");
+document.write(f1Team["ferrari"]["one"]); //print Fernando Alonso
+document.write("<br>");
+document.write(f1Team.president); // print Bernie Ecclestone
+document.write("<br>");
+document.write(Object.keys(f1Team).length); // print length
+document.write("<br>");
+document.write(Object.keys(f1Team.redbull).length); // print second level length
+</script>
+</body>
+</html>

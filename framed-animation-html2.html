@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<title>Untitled Document</title> 
+</head> 
+<body> 
+<a href="#" onclick="move('plane', 80, 0, 0, 100, 100, 0, 0, 1, 100, 80, 100, true)">click this</a>
+<div id="plane" style="position:absolute; width: 20px; height: 20px; background:red; opacity:1;"></div>
+<script type="text/javascript">
+</script>
+</body> 
+</html>
+<script type="text/javascript">
+function move(element, speed, positionX, positionY, finishedPositionX, finishedPositionY, restartPositionX, restartPositionY, opacityVal, opacitySpeed, fadeStart, fadeFinish, repeat){
+    
+    this.box                = document.getElementById(element);
+    this.speed              = speed;
+    this.positionX          = positionX;
+    this.positionY          = positionY;
+    this.finishedPositionX  = finishedPositionX;
+    this.finishedPositionY  = finishedPositionY;
+    this.restartPositionX   = restartPositionX;
+    this.restartPositionY   = restartPositionY;
+    this.opacityVal         = opacityVal;
+    this.opacitySpeed       = opacitySpeed;
+    this.fadeStart          = fadeStart;
+    this.fadeFinish         = fadeFinish;
+    this.repeat             = repeat;
+    
+    function diagonal(){
+      positionX++;
+      positionY++;
+
+      box.style.left= (positionX)+"px";
+      box.style.top= (positionY)+"px";
+      box.style.opacity=opacityVal;
+
+      if((positionY >= fadeStart) && (positionY <= fadeFinish)){
+        opacityVal-=0.1;
+        var doOpacity = setInterval(opacity, opacitySpeed);
+        clearInterval(doOpacity);
+      }
+
+      if((positionX == finishedPositionX) && (positionY == finishedPositionY)){
+        positionX = restartPositionX;
+        positionY = restartPositionY;
+        opacityVal = 1;
+
+        if(repeat == false){
+          clearInterval(moveDiagonal);
+          moveDiagonal = 0;
+        }
+      }
+    }
+
+    function opacity(){
+      opacityVal -= 0.1;
+      console.log(opacityVal);
+    }
+
+    var moveDiagonal = setInterval(diagonal, speed);
+}
+</script>

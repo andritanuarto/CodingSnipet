@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<title>Untitled Document</title> 
+</head>
+<body>
+<script>
+var myObject = {
+	iAm: 'an object',
+	whatAmI : function(){
+		alert('I am ' + this.iAm);
+	},
+	myArray: ["andri", this.iAm]
+} 
+
+// myObject.whatAmI();
+console.log(myObject.myArray[1]);
+</script>
+</body>
+</html>

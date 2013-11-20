@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html> 
+<head> 
+<title>Untitled Document</title> 
+</head>
+<body>
+<script>
+var Customer = function(id){
+	var totalSpend = 0;
+	
+	function isSpecial(){
+		return totalSpend > 100;
+	}
+
+	return {
+		placeOrder: function(order){
+			totalSpend += order.total;
+		},
+		getReward: function(){
+			if(isSpecial()){
+				return "Special Customer Coupon!";
+			} else {
+				return "Nothing Today";
+			}
+		},
+		toString: function(){
+			return "Customer #" + id;
+		}
+	};
+};
+</script>
+</body>
+</html>
