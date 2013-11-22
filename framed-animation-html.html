@@ -13,26 +13,17 @@ function move(){
 
   function frame(){
 
-    var color;
+    var color = new Array('blue', 'red', 'orange', 'green', 'black');
     background++;
     
-    if(background == 0){
-      color = "red";
-    } else if (background == 1){
-      color = "blue";
-    } else if (background == 2){
-      color = "orange";
-    } else if (background == 3){
-      color = "green";
-    } else if (background == 4){
-      color = "grey";
-    } else if (background == 5){
-      color = "black";
-    } else {
-      background = 0;
+    for(var i = 0; i < color.length; i++){
+      if(background == i){
+        bgColor = color[i];
+      }
     }
-      console.log(background);
-    document.getElementById('box').style.background = color; 
+
+    console.log(background);
+    document.getElementById('box').style.background = bgColor; 
 
     if (background == 5){
       clearInterval(id);
