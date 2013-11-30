@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="http://maps.googleapis.com/maps/api/js?key=ReplaceThisWithYourKey&sensor=false">
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD5u7v5mlHIxkDMPUSUIJ7i1gJ0tgAlVf4&sensor=false">
 </script>
 
 <script>
 function initialize()
 {
-	//Creating Map Property
-	var mapProp = {
-	  center:new google.maps.LatLng(51.508742,-0.120850), //central location in latitude and longitude parameter
-	  zoom:5,											  //zoom
-	  mapTypeId:google.maps.MapTypeId.ROADMAP			  //MapTypeId 4 different parameters HYBRID, ROADMAP, SATELLITE, TERRAIN 
-	};
+  var myCenter = new google.maps.LatLng(51.508742,-0.120850);
+  //Creating Map Property
+  var mapProp = {
+    center:myCenter, //central location in latitude and longitude parameter
+    zoom:5,											  //zoom
+    mapTypeId:google.maps.MapTypeId.ROADMAP			  //MapTypeId 4 options HYBRID, ROADMAP, SATELLITE, TERRAIN 
+  };
 
-	//Create New Map
-	var map=new google.maps.Map(document.getElementById("googleMap")
-	  ,mapProp);
+//Create New Map
+  var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+  var marker=new google.maps.Marker({
+  	position: myCenter,
+  });
+
+  var markerTwo=new google.maps.Marker({
+  	position: new google.maps.LatLng(51.508742,-0.220850),
+  });
+
+  marker.setMap(map);
+  markerTwo.setMap(map);
 }
 
-//Execute the initialize() function that construct the Map object on window load, to ensure that map is place on the page after the page is fully loaded
+/*
+Execute the initialize() function that construct the Map object on window load, to 
+ensure that map is place on the page after the page is fully loaded
+*/
+
 google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
