@@ -8,8 +8,8 @@
 
 
 <form action="include/insert.php" method="post">
-Location Name: <input type="text" name="placeNameForm">
-Address: <input type="text" name="addressNameForm">
+Location Name: <input type="text" name="placeNameForm"></br>
+Address: <input type="text" name="addressNameForm"></br>
 <input type="submit">
 </form>
 
@@ -19,10 +19,12 @@ Address: <input type="text" name="addressNameForm">
 $result = mysqli_query($con,"SELECT * FROM locationPlace");
 while($row = mysqli_fetch_array($result))
 {
-	 echo '<ul>';
-	 echo '<li>'.$row['placeName'].'</li>';
-	 echo '<li>'.$row['addressName'].'</li>';
-	 echo '</ul>';
+	 echo '<form action="include/delete.php" method="post">';
+	 echo $row['placeName'];
+	 echo ' ';
+	 echo $row['addressName'];
+	 echo ' <a href="include/delete.php?id='.$row['id'].'">delete</a>';
+	 echo '</form>';
 }
 ?>
 </body>

@@ -20,7 +20,8 @@
     	</div>
 		<div id="map-canvas"></div>
 	</div>
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD5u7v5mlHIxkDMPUSUIJ7i1gJ0tgAlVf4&sensor=false">
+</script>
 <script src="js/map.js"></script>
 <script type=​"text/​javascript" src=​"js/jquery.js">​</script>​
 </body>

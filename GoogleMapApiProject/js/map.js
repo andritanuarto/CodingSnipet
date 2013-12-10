@@ -16,6 +16,20 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 var addresses = document.getElementsByClassName("locationStore");
 
+
+
+function codeAddress() {
+  var address = document.getElementById('address').value;
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+    } else {
+      console.log('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+  map.setZoom(12);
+}
+
 for(var i = 0; i < addresses.length; i++){
   geocoder = new google.maps.Geocoder(); //create new geocoder object
   addresses[i].onclick = function(){
@@ -26,7 +40,7 @@ for(var i = 0; i < addresses.length; i++){
             map.setCenter(results[0].geometry.location); //set map center
             map.setZoom(17);
           } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            console.log('Geocode was not successful for the following reason: ' + status);
           }
         }
     );
@@ -35,7 +49,8 @@ for(var i = 0; i < addresses.length; i++){
 
 var infowindow = new google.maps.InfoWindow({
       content: null,
-      maxWidth: 200
+      maxWidth: 300,
+      minHeight: 100
 });
 
 var infoWindowContent = [
@@ -64,8 +79,8 @@ for(var i = 0; i < addresses.length; i++){
 
           google.maps.event.addListener(markers,'click', function(){
             map.setCenter(markers.getPosition()); 
-            infowindow.setContent(results[0].formatted_address);
-            console.log(results[0].formatted_address);
+            infowindow.setContent(results[0].formatted_address + "<br> (lat, lng): " + results[0].geometry.location);
+            console.log(results[0].formatted_address + "<br> lat lng:" + results[0].geometry.location);
             infowindow.open(map,markers);
             map.setZoom(18);
           });       
@@ -73,3 +88,5 @@ for(var i = 0; i < addresses.length; i++){
   );
   }
 }
+
+
