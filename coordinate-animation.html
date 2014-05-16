@@ -4,18 +4,94 @@
 <title>Untitled Document</title> 
 </head> 
 <body> 
-  <a href="#" onclick="move('plane', 80, 0, 0, 100, 100, 0, 0, 1, 100, 80, 100, true)">click this</a>
+  <a href="#" onclick="Move.moveDiagonal('plane', 80, 0, 0, 100, 100, 0, 0, 1, 100, 80, 100, true)">click this</a>
   <div id="plane" style="position:absolute; width: 20px; height: 20px; background:red; opacity:1;"></div>
 </body> 
 </html>
 
 <script type="text/javascript">
+
 /*
 Author: Andri Tanuarto
 Date: Nov 20, 2013
+Last Edited: May 15, 2014
 Description: Coordinate javascript animation. From this code you can control the moving element using x & y coordinate concept.
 */
 
+var Move = {
+    moveDiagonal : function(
+        element,
+        speed,
+        positionX,
+        positionY,
+        finishedPositionX,
+        finishedPositionY,
+        restartPositionX,
+        restartPositionY,
+        opacityVal,
+        opacitySpeed,
+        fadeStart,
+        fadeFinish,
+        repeat
+    ){
+
+        var box                = document.getElementById(element);   // Select Element (string)
+        var speed              = speed;                              // Animation Speed (int)
+        var positionX          = positionX;                          // Start X Position (int)
+        var positionY          = positionY;                          // Start Y position (int)
+        var finishedPositionX  = finishedPositionX;                  // Finished X Position (int)
+        var finishedPositionY  = finishedPositionY;                  // Finished Y Position (int)
+        var restartPositionX   = restartPositionX;                   // Restart X Position (int)
+        var restartPositionY   = restartPositionY;                   // Restart Y Position (int)
+        var opacityVal         = opacityVal;                         // Start CSS Opacity Value (int)
+        var opacitySpeed       = opacitySpeed;                       // Opacity Speed or Hide Speed (int)
+        var fadeStart          = fadeStart;                          // Fade Start From Position Y (int)
+        var fadeFinish         = fadeFinish;                         // Fade Finish From Position Y (int)
+        var repeat             = repeat;                             // Repeat Animation (boolean)
+
+        //xyMove is a function to create animation move base on css left and top position
+
+        function xyMove(){
+            positionX++;
+            positionY++;
+
+            //box style
+            box.style.left= (positionX)+"px";
+            box.style.top= (positionY)+"px";
+            box.style.opacity=opacityVal;
+
+            //do opacity according when the element start to fade and finish fade
+            if((positionY >= fadeStart) && (positionY <= fadeFinish)){
+                opacityVal-=0.1;
+                var doOpacity = setInterval(opacity, opacitySpeed);
+                clearInterval(doOpacity);
+            }
+
+            //restart position when both x & y are reached the finished position
+            if((positionX == finishedPositionX) && (positionY == finishedPositionY)){
+                positionX = restartPositionX;
+                positionY = restartPositionY;
+                opacityVal = 1;
+
+                //set if the animation is repeated
+                if(repeat == false){
+                    clearInterval(intervalAnimation);
+                    intervalAnimation = 0; //set 0 to stop animation
+                }
+            }
+        }
+
+        //opacity function for doing opacity
+        function opacity(){
+            opacityVal -= 0.1;
+        }
+
+        //set intervalAnimation
+        var intervalAnimation = setInterval(xyMove, speed);
+    }
+}
+
+/*
 function move(element, speed, positionX, positionY, finishedPositionX, finishedPositionY, restartPositionX, restartPositionY, opacityVal, opacitySpeed, fadeStart, fadeFinish, repeat){
     
     this.box                = document.getElementById(element);   // Select Element (string)
@@ -72,4 +148,5 @@ function move(element, speed, positionX, positionY, finishedPositionX, finishedP
     //set intervalAnimation
     var intervalAnimation = setInterval(xyMove, speed);
 }
+*/
 </script>
