@@ -1,4 +1,4 @@
 CodingSnipet
 ============
 
-This is coding my personal coding snipet
+my personal coding snipets
